@@ -1,3 +1,3 @@
 #!/bin/bash
-docker build . --rm -t amirenv
+docker build . --rm -t cartographerenv
 
