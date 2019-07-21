@@ -1,0 +1,82 @@
+
+
+<robot name="Structure">
+  <link name="base_link" />
+  <link name="base_frame" />
+  <link name="imu" />
+  <link name="camera_depth_optical_frame" />
+  <link name="camera_visible_optical_frame" />
+  <link name="royale_camera_optical_frame" />
+  <link name="royale_camera_link" />
+  <link name="camera_depth_frame" />
+  <link name="Scan_1_link" />
+  <link name="Scan_2_link" />
+  <link name="Scan_3_link" />  
+  <link name="Scan_4_link" />   
+  
+  <joint name="scanner_link_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="base_frame" />
+    <origin xyz="0. 0. 0." rpy="0. 0. 2.70526" />
+  </joint>
+  
+  <joint name="imu_link_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="imu" />
+    <origin xyz="0. 0. 0." rpy="0. 0. 0." />
+  </joint>
+
+  <joint name="point_cloud_joint" type="fixed">
+    <parent link="camera_depth_frame" />
+    <child link="camera_depth_optical_frame" />
+    <origin xyz="0. 0. 0." rpy="-1.57079632679 0. -1.57079632679" />
+  </joint>
+
+  <joint name="point_cloud_scan_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="camera_depth_frame" />
+    <origin xyz="0. 0. 0." rpy="0 0. 0" />
+  </joint>
+
+  <joint name="camera_link_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="camera_visible_optical_frame" />
+    <origin xyz="0. 0. 0." rpy="0. 0. 0." />
+  </joint>
+  
+  <joint name="point_cloud_joint_p" type="fixed">
+    <parent link="royale_camera_link" />
+    <child link="royale_camera_optical_frame" />
+    <origin xyz="0. 0. 0." rpy="-1.57079632679 0. -1.57079632679" />
+  </joint>
+
+  <joint name="camera_link_joint_p" type="fixed">
+    <parent link="base_link" />
+    <child link="royale_camera_link" />
+    <origin xyz="-0.08 0. -0.09" rpy="0. 1.308996939 0." />
+  </joint>
+  
+  <joint name="scanner1_link_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="Scan_1_link" />
+    <origin xyz="0. 0. 0." rpy="0. 0. 0." />
+  </joint>
+  
+  <joint name="scanner2_link_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="Scan_2_link" />
+    <origin xyz="0. 0. 0." rpy="0. 0. 2.0943951" />
+  </joint> 
+  
+  <joint name="scanner3_link_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="Scan_3_link" />
+    <origin xyz="0. 0. 0." rpy="0. 0. -2.0943951" />
+  </joint>  
+  
+  <joint name="scanner4_link_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="Scan_4_link" />
+    <origin xyz="0. 0. 0." rpy="0. 0. 3.14159" />
+  </joint>        
+</robot>

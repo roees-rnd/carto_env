@@ -21,13 +21,13 @@
     <arg name="StartTime"           default="0"/>
     <arg name="DurationTime"        default="500"/>
     <arg name="RunCartographer"     default="true"/>
-    <arg name="YamlFile" 		    default="$(find cartographer_ros)/configuration_files/ScanFilter/FrontScanOnlyOf60.yaml"/>
+    <arg name="YamlFile" 	    default="$(find cartographer_ros)/configuration_files/ScanFilter/FrontScanOnlyOf60.yaml"/>
     <arg name="MinHeightFilter"     default="-0.5"/>
     <arg name="MaxHeightFilter"     default="0.5"/>   
     <arg name="IsConfig3D"          default="false"/>
-    <arg name="IsConfigWithOdom"    default="false"/>
+    <arg name="IsConfigWithOdom"    default="true"/>
     <arg name="GenerateOdom"        default="false"/>
-    <arg name="SensorMode" 		    default="0"/>
+    <arg name="SensorMode" 	    default="2"/>
     <!--SensorMode options =  
             0 - PointCloud from Structure Sensor
             1 - PointCloud from PicoFlexx Sensor
@@ -404,5 +404,5 @@
     </group> 
 
                 
-    <node name="playbag" pkg="rosbag" type="play" args="--clock --start=$(arg StartTime) --duration=$(arg DurationTime) $(arg bag_filename) /scan:=RP_scan" />
+    <node name="playbag" pkg="rosbag" type="play" args="--start=$(arg StartTime) --duration=$(arg DurationTime) $(arg bag_filename) /scan:=RP_scan" />
 </launch>

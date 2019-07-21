@@ -1,5 +1,5 @@
 ### based on ubuntu 16.04 with ros kinetic
-FROM ros:kinetic
+FROM ros:melodic
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -14,9 +14,11 @@ RUN apt-get install -y openjdk-8-jre-headless
 RUN apt-get install -y ubuntu-make 
 RUN apt-get install -y python-pip \
 python-tk \
-ros-kinetic-cv-bridge \
-ros-kinetic-vision-opencv \ 
-ros-kinetic-depthimage-to-laserscan
+ros-melodic-cv-bridge \
+ros-melodic-vision-opencv \ 
+ros-melodic-depthimage-to-laserscan \
+ros-melodic-image-proc \
+ros-melodic-depth-image-proc
 RUN apt-get install -y python-wstool python-rosdep ninja-build
 
 RUN pip install --upgrade pip==9.0.3
@@ -48,7 +50,7 @@ COPY CartographerFiles/urdf/ /root/catkin_ws/src/cartographer_ros/cartographer_r
 RUN mkdir /root/catkin_ws/src/scripts/
 COPY CartographerFiles/PythonScripts/ /root/catkin_ws/src/scripts/
 WORKDIR /root/catkin_ws/
-RUN /bin/bash -c '. /opt/ros/kinetic/setup.bash; catkin_make_isolated --install --use-ninja'
+RUN /bin/bash -c '. /opt/ros/melodic/setup.bash; catkin_make_isolated --install --use-ninja'
 copy CartographerFiles/PythonScripts/ /root/catkin_ws/install_isolated/share/scripts/
 RUN mkdir /root/catkin_ws/records/
 RUN echo "source install_isolated/setup.bash" >> /root/.bashrc

@@ -1,7 +1,7 @@
 # MyFirstDocker
 The docker includes
-* Ubuntu 16.04
-* ROS kinetic
+* Ubuntu 18.04
+* ROS melodic
 * python 3.5.2 (In addition to python2 which comes with ROS)
 * OpenCV 4.1
 * All needed ROS-related configuration to run python3 with
