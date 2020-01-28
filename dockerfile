@@ -50,7 +50,7 @@ COPY CartographerFiles/urdf/ /root/catkin_ws/src/cartographer_ros/cartographer_r
 RUN mkdir /root/catkin_ws/src/scripts/
 COPY CartographerFiles/PythonScripts/ /root/catkin_ws/src/scripts/
 WORKDIR /root/catkin_ws/
-RUN /bin/bash -c '. /opt/ros/melodic/setup.bash; catkin_make_isolated --install --use-ninja'
+RUN /bin/bash -c '. /opt/ros/melodic/setup.bash; catkin_make_isolated -j1 --install --use-ninja'
 copy CartographerFiles/PythonScripts/ /root/catkin_ws/install_isolated/share/scripts/
 RUN mkdir /root/catkin_ws/records/
 RUN echo "source install_isolated/setup.bash" >> /root/.bashrc
