@@ -9,7 +9,7 @@
   <link name="royale_camera_optical_frame" />
   <link name="royale_camera_link" />
   <link name="camera_depth_frame" />
-  <link name="Scan_1_link" />
+  <link name="laser" />
   <link name="Scan_2_link" />
   <link name="Scan_3_link" />  
   <link name="Scan_4_link" />   
@@ -58,8 +58,8 @@
   
   <joint name="scanner1_link_joint" type="fixed">
     <parent link="base_link" />
-    <child link="Scan_1_link" />
-    <origin xyz="0. 0. 0." rpy="0. 0. 0." />
+    <child link="laser" />
+    <origin xyz="0. 0. 0." rpy="0. 0. 1.72" />
   </joint>
   
   <joint name="scanner2_link_joint" type="fixed">

@@ -404,5 +404,5 @@
     </group> 
 
                 
-    <node name="playbag" pkg="rosbag" type="play" args="--start=$(arg StartTime) --duration=$(arg DurationTime) $(arg bag_filename) /scan:=RP_scan" />
+    <node name="playbag" pkg="rosbag" type="play"  args="--clock" args="--start=$(arg StartTime) --duration=$(arg DurationTime) $(arg bag_filename) /scan:=RP_scan" />
 </launch>
