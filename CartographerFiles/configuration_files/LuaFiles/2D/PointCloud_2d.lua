@@ -52,9 +52,9 @@ TRAJECTORY_BUILDER_2D.max_range = MAX_2D_RANGE
 TRAJECTORY_BUILDER_2D.min_z = -3
 TRAJECTORY_BUILDER_2D.max_z = 3
 
-TRAJECTORY_BUILDER_2D.loop_closure_adaptive_voxel_filter.min_num_points = 50
-TRAJECTORY_BUILDER_2D.submaps.range_data_inserter.probability_grid_range_data_inserter.hit_probability = 0.6
-TRAJECTORY_BUILDER_2D.submaps.range_data_inserter.probability_grid_range_data_inserter.miss_probability = 0.4
+TRAJECTORY_BUILDER_2D.loop_closure_adaptive_voxel_filter.min_num_points = 3
+TRAJECTORY_BUILDER_2D.submaps.range_data_inserter.probability_grid_range_data_inserter.hit_probability = 0.8
+TRAJECTORY_BUILDER_2D.submaps.range_data_inserter.probability_grid_range_data_inserter.miss_probability = 0.2
 
 POSE_GRAPH.optimize_every_n_nodes = 50
 POSE_GRAPH.optimization_problem.ceres_solver_options.max_num_iterations = 20
@@ -64,7 +64,7 @@ POSE_GRAPH.constraint_builder.fast_correlative_scan_matcher.linear_search_window
 POSE_GRAPH.constraint_builder.fast_correlative_scan_matcher.angular_search_window = math.rad(5.)
 
 POSE_GRAPH.optimization_problem.huber_scale = 1e3
-POSE_GRAPH.optimization_problem.acceleration_weight = 1e1
+POSE_GRAPH.optimization_problem.acceleration_weight = 0.0001e1
 POSE_GRAPH.optimization_problem.rotation_weight = 1e1
 POSE_GRAPH.optimization_problem.ceres_solver_options.num_threads = 1
 POSE_GRAPH.optimization_problem.log_solver_summary = false

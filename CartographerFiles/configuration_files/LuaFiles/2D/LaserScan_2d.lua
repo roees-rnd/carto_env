@@ -46,29 +46,69 @@ MAP_BUILDER.use_trajectory_builder_2d = true
 MAP_BUILDER.num_background_threads = 4
 
 MAX_2D_RANGE = 8
+-- src/cartographer/configuration_files/trajectory_builder_2d.lua:
+
 TRAJECTORY_BUILDER_2D.use_imu_data = true
-TRAJECTORY_BUILDER_2D.min_range = 0.5
+TRAJECTORY_BUILDER_2D.min_range = 0.01
 TRAJECTORY_BUILDER_2D.max_range = MAX_2D_RANGE
-TRAJECTORY_BUILDER_2D.min_z = -3
+TRAJECTORY_BUILDER_2D.min_z = -0.5
 TRAJECTORY_BUILDER_2D.max_z = 3
+TRAJECTORY_BUILDER_2D.num_accumulated_range_data = 1 -- was 1
 
 TRAJECTORY_BUILDER_2D.loop_closure_adaptive_voxel_filter.min_num_points = 50
 TRAJECTORY_BUILDER_2D.submaps.range_data_inserter.probability_grid_range_data_inserter.hit_probability = 0.9
 TRAJECTORY_BUILDER_2D.submaps.range_data_inserter.probability_grid_range_data_inserter.miss_probability = 0.1
+TRAJECTORY_BUILDER_2D.submaps.grid_options_2d.resolution = 0.4 -- 0.05
+TRAJECTORY_BUILDER_2D.real_time_correlative_scan_matcher.translation_delta_cost_weight = 1e-1
+TRAJECTORY_BUILDER_2D.real_time_correlative_scan_matcher.rotation_delta_cost_weight = 1e-1
 
-POSE_GRAPH.optimize_every_n_nodes = 50
+TRAJECTORY_BUILDER_2D.motion_filter.max_distance_meters = 0.1 -- 0.2
+TRAJECTORY_BUILDER_2D.motion_filter.max_angle_radians = math.rad(0.1) -- math.rad(1.)
+TRAJECTORY_BUILDER_2D.use_online_correlative_scan_matching = false -- false
+
+TRAJECTORY_BUILDER_2D.submaps.num_range_data = 10 -- 90
+
+
+-- In src/cartographer/configuration_files/pose_graph.lua:
+POSE_GRAPH.optimize_every_n_nodes = 20 -- 50
 POSE_GRAPH.optimization_problem.ceres_solver_options.max_num_iterations = 20
-POSE_GRAPH.constraint_builder.min_score = 0.48
+POSE_GRAPH.constraint_builder.min_score = 0.001
 POSE_GRAPH.constraint_builder.log_matches = false
 POSE_GRAPH.constraint_builder.fast_correlative_scan_matcher.linear_search_window = 1.
 POSE_GRAPH.constraint_builder.fast_correlative_scan_matcher.angular_search_window = math.rad(5.)
 
 POSE_GRAPH.optimization_problem.huber_scale = 1e3
-POSE_GRAPH.optimization_problem.acceleration_weight = 1e1
-POSE_GRAPH.optimization_problem.rotation_weight = 1e1
+POSE_GRAPH.optimization_problem.acceleration_weight = 0.0001e1
+POSE_GRAPH.optimization_problem.rotation_weight = 15e5
 POSE_GRAPH.optimization_problem.ceres_solver_options.num_threads = 1
+
+POSE_GRAPH.optimization_problem.local_slam_pose_translation_weight = 15e5
+POSE_GRAPH.optimization_problem.local_slam_pose_rotation_weight = 0.01e5
+POSE_GRAPH.optimization_problem.odometry_translation_weight = 0.0001e5
+POSE_GRAPH.optimization_problem.odometry_rotation_weight = 5e5
+POSE_GRAPH.optimization_problem.fixed_frame_pose_translation_weight = 0.0001e1 -- 1e1
+POSE_GRAPH.optimization_problem.fixed_frame_pose_rotation_weight = 1e4
+
+-- optimization_problem = {
+--    huber_scale = 1e1,
+--    acceleration_weight = 1e3,
+--    rotation_weight = 3e5,
+--    local_slam_pose_translation_weight = 1e5,
+--    local_slam_pose_rotation_weight = 1e5,
+--    odometry_translation_weight = 1e5,
+--    odometry_rotation_weight = 1e5,
+--    fixed_frame_pose_translation_weight = 1e1,
+--    fixed_frame_pose_rotation_weight = 1e2,
+--    log_solver_summary = false,
+--    ceres_solver_options = {
+--      use_nonmonotonic_steps = false,
+--      max_num_iterations = 50,
+--      num_threads = 7,
+--    },
+
 POSE_GRAPH.optimization_problem.log_solver_summary = false
 POSE_GRAPH.global_constraint_search_after_n_seconds = 50.
+
 
 
 return options
