@@ -21,7 +21,7 @@
     <arg name="StartTime"           default="0"/>
     <arg name="DurationTime"        default="500"/>
     <arg name="RunCartographer"     default="true"/>
-    <arg name="YamlFile" 	    default="$(find cartographer_ros)/configuration_files/ScanFilter/FrontScanOnlyOf60.yaml"/>
+    <arg name="YamlFile" 	    default="/root/work/CartographerFiles/configuration_files/ScanFilter/FrontScanOnlyOf60.yaml"/>
     <arg name="MinHeightFilter"     default="-0.5"/>
     <arg name="MaxHeightFilter"     default="0.5"/>   
     <arg name="IsConfig3D"          default="false"/>
@@ -42,8 +42,8 @@
     
 	<param if="$(arg sim_time)" name="use_sim_time" value="true"/>
 	
-	<param if="$(arg sim_time)" name="robot_description" textfile="$(find cartographer_ros)/urdf/StructurePicoDownKit.urdf"/>
-    <param unless="$(arg sim_time)" name="robot_description" textfile="$(find cartographer_ros)/urdf/StructurePicoDownKit.urdf"/>
+	<param if="$(arg sim_time)" name="robot_description" textfile="/root/work/CartographerFiles/urdf/StructurePicoDownKit.urdf"/>
+    <param unless="$(arg sim_time)" name="robot_description" textfile="/root/work/CartographerFiles/urdf/StructurePicoDownKit.urdf"/>
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
   
     <remap from="/imu_node/imu" to="/imu"/>
@@ -88,7 +88,7 @@
         <arg name="LuaConfigFile" value="2D/PointCloud_2d.lua" if="$(eval not arg('IsConfig3D') and not arg('IsConfigWithOdom'))"/>
         
         <node if="$(arg RunCartographer)" name="cartographer_node" pkg="cartographer_ros" type="cartographer_node" 
-              args="-configuration_directory $(find cartographer_ros)/configuration_files/LuaFiles
+              args="-configuration_directory /root/work/CartographerFiles/configuration_files/LuaFiles
               -configuration_basename $(arg LuaConfigFile)"
               output="screen">
         </node>
@@ -135,7 +135,7 @@
         <arg name="LuaConfigFile" value="2D/PointCloud_2d.lua" if="$(eval not arg('IsConfig3D') and not arg('IsConfigWithOdom'))"/>
         
         <node if="$(arg RunCartographer)" name="cartographer_node" pkg="cartographer_ros" type="cartographer_node" 
-              args="-configuration_directory $(find cartographer_ros)/configuration_files/LuaFiles 
+              args="-configuration_directory /root/work/CartographerFiles/configuration_files/LuaFiles 
               -configuration_basename $(arg LuaConfigFile)"
               output="screen">
         </node>
@@ -163,7 +163,7 @@
         <arg name="LuaConfigFile" value="2D/LaserScan_2d.lua" if="$(eval not arg('IsConfig3D') and not arg('IsConfigWithOdom'))"/>
         
         <node if="$(arg RunCartographer)" name="cartographer_node" pkg="cartographer_ros" type="cartographer_node" 
-              args="-configuration_directory $(find cartographer_ros)/configuration_files/LuaFiles 
+              args="-configuration_directory /root/work/CartographerFiles/configuration_files/LuaFiles 
               -configuration_basename $(arg LuaConfigFile)"
               output="screen">
         </node>
@@ -185,7 +185,7 @@
         <arg name="LuaConfigFile" value="2D/LaserScan_2d.lua" if="$(eval not arg('IsConfig3D') and not arg('IsConfigWithOdom'))"/>
         
         <node if="$(arg RunCartographer)" name="cartographer_node" pkg="cartographer_ros" type="cartographer_node" 
-              args="-configuration_directory $(find cartographer_ros)/configuration_files/LuaFiles 
+              args="-configuration_directory /root/work/CartographerFiles/configuration_files/LuaFiles 
               -configuration_basename $(arg LuaConfigFile)"
               output="screen">
         </node>
@@ -198,10 +198,10 @@
         <arg name="LuaConfigFile" value="2D/LaserScan_2d.lua" unless="$(arg IsConfig3D)"/> 
         
         <node if="$(arg RunCartographer)" name="cartographer_node" pkg="cartographer_ros" type="cartographer_node" 
-              args="-configuration_directory $(find cartographer_ros)/configuration_files/LuaFiles 
+              args="-configuration_directory /root/work/CartographerFiles/configuration_files/LuaFiles 
               -configuration_basename $(arg LuaConfigFile)" 
               output="screen">
-              <remap from="scan" to="/RP_scan" />
+              <remap from="scan" to="/tof_ranges" />
         </node> <!-- -load_state_filename $(arg load_state_filename)" -->
         <node if="$(arg RunCartographer)" name="cartographer_occupancy_grid_node" pkg="cartographer_ros"
               type="cartographer_occupancy_grid_node" args="-resolution 0.05"/> 
@@ -224,7 +224,7 @@
         <arg name="LuaConfigFile" value="2D/LaserScan_2d.lua" if="$(eval not arg('IsConfig3D') and not arg('IsConfigWithOdom'))"/>
         
         <node if="$(arg RunCartographer)" name="cartographer_node" pkg="cartographer_ros" type="cartographer_node" 
-              args="-configuration_directory $(find cartographer_ros)/configuration_files/LuaFiles 
+              args="-configuration_directory /root/work/CartographerFiles/configuration_files/LuaFiles 
               -configuration_basename $(arg LuaConfigFile)"
               output="screen">
         </node>
@@ -241,7 +241,7 @@
         <arg name="LuaConfigFile" value="2D/LaserScan3_2d.lua" if="$(eval not arg('IsConfig3D') and not arg('IsConfigWithOdom'))"/>
         
         <node if="$(arg RunCartographer)" name="cartographer_node" pkg="cartographer_ros" type="cartographer_node" 
-              args="-configuration_directory $(find cartographer_ros)/configuration_files/LuaFiles 
+              args="-configuration_directory /root/work/CartographerFiles/configuration_files/LuaFiles 
               -configuration_basename $(arg LuaConfigFile)"
               output="screen">
         </node>
@@ -283,7 +283,7 @@
         <arg name="LuaConfigFile" value="2D/LaserScan_2d.lua" if="$(eval not arg('IsConfig3D') and not arg('IsConfigWithOdom'))"/>
         
         <node if="$(arg RunCartographer)" name="cartographer_node" pkg="cartographer_ros" type="cartographer_node" 
-              args="-configuration_directory $(find cartographer_ros)/configuration_files/LuaFiles 
+              args="-configuration_directory /root/work/CartographerFiles/configuration_files/LuaFiles 
               -configuration_basename $(arg LuaConfigFile)"
               output="screen">
         </node>
@@ -314,7 +314,7 @@
         <arg name="LuaConfigFile" value="2D/LaserScan_2d.lua" if="$(eval not arg('IsConfig3D') and not arg('IsConfigWithOdom'))"/>
         
         <node if="$(arg RunCartographer)" name="cartographer_node" pkg="cartographer_ros" type="cartographer_node" 
-              args="-configuration_directory $(find cartographer_ros)/configuration_files/LuaFiles 
+              args="-configuration_directory /root/work/CartographerFiles/configuration_files/LuaFiles 
               -configuration_basename $(arg LuaConfigFile)"
               output="screen">
         </node>
@@ -395,7 +395,7 @@
         <arg name="LuaConfigFile" value="2D/PointCloud2_2d.lua" if="$(eval not arg('IsConfig3D') and not arg('IsConfigWithOdom'))"/>
         
         <node if="$(arg RunCartographer)" name="cartographer_node" pkg="cartographer_ros" type="cartographer_node" 
-              args="-configuration_directory $(find cartographer_ros)/configuration_files/LuaFiles 
+              args="-configuration_directory /root/work/CartographerFiles/configuration_files/LuaFiles 
               -configuration_basename $(arg LuaConfigFile)"
               output="screen">
         </node>
@@ -403,6 +403,8 @@
               type="cartographer_occupancy_grid_node" args="-resolution 0.05"/> 
     </group> 
 
-                
-    <node name="playbag" pkg="rosbag" type="play" args="--clock --start=$(arg StartTime) --duration=$(arg DurationTime) $(arg bag_filename) /scan:=RP_scan" />
+    <node pkg="scripts" name="lidar2tof" type="lidar2tof.py" output="screen">
+        <!-- <param name="frame_id" value="laser" /> -->
+   </node>            
+    <node name="playbag" pkg="rosbag" type="play" args="--clock --start=$(arg StartTime) --duration=$(arg DurationTime) $(arg bag_filename)" />
 </launch>
