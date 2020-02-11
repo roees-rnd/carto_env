@@ -27,7 +27,7 @@
     <arg name="IsConfig3D"          default="false"/>
     <arg name="IsConfigWithOdom"    default="false"/>
     <arg name="GenerateOdom"        default="false"/>
-    <arg name="SensorMode" 	    default="4"/>
+    <arg name="SensorMode" 	    default="10"/>
     <!--SensorMode options =  
             0 - PointCloud from Structure Sensor
             1 - PointCloud from PicoFlexx Sensor
@@ -202,6 +202,24 @@
               -configuration_basename $(arg LuaConfigFile)" 
               output="screen">
               <remap from="scan" to="/tof_ranges" />
+        </node> <!-- -load_state_filename $(arg load_state_filename)" -->
+        <node if="$(arg RunCartographer)" name="cartographer_occupancy_grid_node" pkg="cartographer_ros"
+              type="cartographer_occupancy_grid_node" args="-resolution 0.05"/> 
+        <node if="$(arg GenerateOdom)" name="ConvertTF2Odom" pkg="scripts" type="ConvertTF2Odom.py" />
+        <node if="$(arg GenerateOdom)" pkg="rosbag" type="record" name="rosbag_record_diag" args="record -o $(arg rec_bag_filename) /imu_node/imu /clock /depth/image /depth/camera_info 
+             /royale_camera_driver/depth_image /royale_camera_driver/camera_info /royale_camera_driver/gray_image /RP_scan /odom /visible/image_raw /visible/camera_info" output = "screen"/>
+<!--        <node if="$(arg GenerateOdom)" pkg="rosbag" type="record" name="rosbag_record_diag" args="record -o $(arg rec_bag_filename) /clock /odom /tf /map" output = "screen"/> -->            
+    </group>
+
+    <group if="$(eval arg('SensorMode') == 10)"> <!-- LaserScan from mr18 Sensor (Full scan) -->        
+        <arg name="LuaConfigFile" value="3D/LaserScan_3d.lua" if="$(arg IsConfig3D)"/>
+        <arg name="LuaConfigFile" value="2D/LaserScan_2d.lua" unless="$(arg IsConfig3D)"/> 
+        
+        <node if="$(arg RunCartographer)" name="cartographer_node" pkg="cartographer_ros" type="cartographer_node" 
+              args="-configuration_directory /root/work/CartographerFiles/configuration_files/LuaFiles 
+              -configuration_basename $(arg LuaConfigFile)" 
+              output="screen">
+              <remap from="scan" to="/mr18" />
         </node> <!-- -load_state_filename $(arg load_state_filename)" -->
         <node if="$(arg RunCartographer)" name="cartographer_occupancy_grid_node" pkg="cartographer_ros"
               type="cartographer_occupancy_grid_node" args="-resolution 0.05"/> 
