@@ -255,7 +255,10 @@
         <node if="$(arg GenerateOdom)" pkg="rosbag" type="record" name="rosbag_record_diag" args="record -o $(arg rec_bag_filename) /imu_node/imu /clock /depth/image /depth/camera_info 
              /royale_camera_driver/depth_image /royale_camera_driver/camera_info /royale_camera_driver/gray_image /RP_scan /odom /visible/image_raw /visible/camera_info" output = "screen"/>
         <!--        <node if="$(arg GenerateOdom)" pkg="rosbag" type="record" name="rosbag_record_diag" args="record -o $(arg rec_bag_filename) /clock /odom /tf /map" output = "screen"/> -->
-        <param name="tof_half_fov_deg" value="10.0"/>
+        <param name="delta_ang_per_ray_deg" value="0.25"/>
+        <param name="tof_half_fov_deg" value="8.0"/>
+        <param name="noise_per_dist_meter" value="0.07"/>
+        <param name="max_range" value="3.2"/>
 
         <node pkg="tof2lidar" name="tof2lidar" type="tof2lidar" output="screen">
         </node>
