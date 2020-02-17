@@ -247,7 +247,7 @@
 <!--        <node if="$(arg GenerateOdom)" pkg="rosbag" type="record" name="rosbag_record_diag" args="record -o $(arg rec_bag_filename) /clock /odom /tf /map" output = "screen"/> -->            
 
     <node pkg="tof2lidar" name="tof2lidar" type="tof2lidar" output="screen">
-        <rosparam param="delta_ang_per_ray_deg" subst_value="True">2</rosparam>
+        <param name="tof_half_fov_deg" value="10.0"/>
    </node>  
     </group>
 
