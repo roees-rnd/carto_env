@@ -27,7 +27,7 @@ options = {
   use_odometry = false,
   use_nav_sat = false,
   use_landmarks = false,
-  num_laser_scans = 1,
+  num_laser_scans = 2,
   num_multi_echo_laser_scans = 0,
   num_subdivisions_per_laser_scan = 1,
   num_point_clouds = 0,
@@ -47,7 +47,7 @@ MAP_BUILDER.num_background_threads = 4
 
 MAX_2D_RANGE = 4
 -- src/cartographer/configuration_files/trajectory_builder_2d.lua:
-TRAJECTORY_BUILDER_2D.missing_data_ray_length = 3
+TRAJECTORY_BUILDER_2D.missing_data_ray_length = 4
 TRAJECTORY_BUILDER_2D.use_imu_data = true
 TRAJECTORY_BUILDER_2D.min_range = 0.01
 TRAJECTORY_BUILDER_2D.max_range = MAX_2D_RANGE
